@@ -99,6 +99,16 @@ def get_coin(answer, total):
         return total
     else:
         return total 
+
+def play_again(pa_input, total_coins, col, row, victory):
+    if pa_input.lower() == 'y':
+        total_coins = 0
+        col = 1
+        row = 1
+        victory = False
+        return (total_coins, col, row, victory)
+    else:
+        exit()
     
 # The main program starts here
 victory = False
@@ -113,6 +123,8 @@ while not victory:
     victory, col, row = play_one_move(col, row, valid_directions)
     if victory:
         print("Victory! Total coins", str(total_coins) + ".")
+        pa_input = input('Play again (y/n): ')
+        play_again(pa_input, total_coins, col, row, victory)
     else:
         total_coins = coinMessage(col, row, total_coins)
         valid_directions = find_directions(col, row)
