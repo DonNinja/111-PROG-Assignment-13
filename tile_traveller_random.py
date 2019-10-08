@@ -1,16 +1,15 @@
 # Gihub Repo: https://github.com/DonNinja/111-PROG-Assignment-13
 # Þeir sem unnu þetta saman voru: Yngvi Leó Þráinsson, Magnús Friðrik Helgason & Nökkvi Már Nökkvason
 import random
-# random.seed(10)
 
 # Constants
 NORTH = 'n'
 EAST = 'e'
 SOUTH = 's'
 WEST = 'w'
-COINMESSAGE = "Pull a lever (y/n): "
+COINMESSAGE = "Pull a lever (y/n):"
 YESORNO = ["y", "n"]
-DIRECIONLIST = ['n','e','s','w']
+DIRECTIONLIST = ['n','e','s','w']
 
 def main():
     randseed = int(input("Input seed: "))
@@ -27,14 +26,14 @@ def main():
         print_directions(valid_directions)
 
         while not victory:
+            prev_loc = [col, row]
             victory, col, row, valid_moves = play_one_move(col, row, valid_directions, valid_moves)
             if victory:
-                print("Victory! Total coins", str(total_coins) + ".", "Valid moves", valid_moves)
-                pa_input = random.choice(YESORNO)
-                print('Play again (y/n):', pa_input)
+                print("Victory! Total coins", str(total_coins) + ".", "Moves", str(valid_moves) + ".")
+                pa_input = input("Play again (y/n): ")
                 play = play_again(pa_input)
             else:
-                total_coins, valid_moves = coinMessage(col, row, total_coins, valid_moves)
+                total_coins = coinMessage(col, row, total_coins, prev_loc)
                 valid_directions = find_directions(col, row)
                 print_directions(valid_directions)
 
@@ -95,47 +94,46 @@ def play_one_move(col, row, valid_directions, valid_moves):
     ''' Plays one move of the game
         Return if victory has been obtained and updated col,row '''
     victory = False
-    direction = random.choice(DIRECIONLIST)
+    direction = random.choice(["n","e","s","w"])
     print("Direction:", direction)
     direction = direction.lower()
+    valid_moves += 1
     
     if not direction in valid_directions:
         print("Not a valid direction!")
     else:
         col, row = move(direction, col, row)
         victory = is_victory(col, row)
-        valid_moves += 1
     return victory, col, row, valid_moves
 
-def coinMessage(col, row, total_coins, valid_moves):
+def coinMessage(col, row, total_coins, prev_loc):
     prev_coin = total_coins
-    if col == 1 and row == 2:
-        answer = random.choice(YESORNO)
+    if col == 1 and row == 2 and prev_loc != [col, row]:
+        answer = random.choice("yn")
         print(COINMESSAGE, answer)
-        total_coins, valid_moves = get_coin(answer, total_coins, valid_moves)
-    elif col == 2 and row == 2:
-        answer = random.choice(YESORNO)
+        total_coins = get_coin(answer, total_coins)
+    elif col == 2 and row == 2 and prev_loc != [col, row]:
+        answer = random.choice("yn")
         print(COINMESSAGE, answer)
-        total_coins, valid_moves = get_coin(answer, total_coins, valid_moves)
-    elif col == 2 and row == 3:
-        answer = random.choice(YESORNO)
+        total_coins = get_coin(answer, total_coins)
+    elif col == 2 and row == 3 and prev_loc != [col, row]:
+        answer = random.choice("yn")
         print(COINMESSAGE, answer)
-        total_coins, valid_moves = get_coin(answer, total_coins, valid_moves)
-    elif col == 3 and row == 2:
-        answer = random.choice(YESORNO)
+        total_coins = get_coin(answer, total_coins)
+    elif col == 3 and row == 2 and prev_loc != [col, row]:
+        answer = random.choice("yn")
         print(COINMESSAGE, answer)
-        total_coins, valid_moves = get_coin(answer, total_coins, valid_moves)
+        total_coins = get_coin(answer, total_coins)
     if prev_coin != total_coins:
         print("You received 1 coin, your total is now", str(total_coins) + ".")
-    return total_coins, valid_moves
+    return total_coins
 
-def get_coin(answer, total, valid_moves):
-    valid_moves += 1
+def get_coin(answer, total):
     if answer.lower() == "y":
         total += 1
-        return total, valid_moves
+        return total
     else:
-        return total, valid_moves
+        return total 
 
 def play_again(pa_input):
     if pa_input.lower() == 'y':
