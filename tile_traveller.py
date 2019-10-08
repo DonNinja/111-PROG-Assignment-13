@@ -74,13 +74,13 @@ def play_one_move(col, row, valid_directions):
 
 def coinMessage(col, row):
     if col == 1 and row == 2:
-        print(COINMESSAGE)
+        answer = input(COINMESSAGE)
     elif col == 2 and row == 2:
-        print(COINMESSAGE)
+        answer = input(COINMESSAGE)
     elif col == 2 and row == 3:
-        print(COINMESSAGE)
+        answer = input(COINMESSAGE)
     elif col == 3 and row == 2:
-        print(COINMESSAGE)
+        answer = input(COINMESSAGE)
     
 # The main program starts here
 victory = False
