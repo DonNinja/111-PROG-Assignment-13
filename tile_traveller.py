@@ -75,12 +75,24 @@ def play_one_move(col, row, valid_directions):
 def coinMessage(col, row):
     if col == 1 and row == 2:
         answer = input(COINMESSAGE)
+        total = get_coin(answer, total)
     elif col == 2 and row == 2:
         answer = input(COINMESSAGE)
+        total = get_coin(answer, total)
     elif col == 2 and row == 3:
         answer = input(COINMESSAGE)
+        total = get_coin(answer, total)
     elif col == 3 and row == 2:
         answer = input(COINMESSAGE)
+        total = get_coin(answer, total)
+
+
+def get_coin(answer, total):
+    if answer.lower() == y:
+        total += 1
+        return total
+    else:
+        return total 
     
 # The main program starts here
 victory = False
