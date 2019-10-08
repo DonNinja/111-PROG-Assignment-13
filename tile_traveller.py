@@ -1,3 +1,5 @@
+# Gihub Repo: https://github.com/DonNinja/111-PROG-Assignment-13
+
 # Constants
 NORTH = 'n'
 EAST = 'e'
@@ -72,23 +74,26 @@ def play_one_move(col, row, valid_directions):
         victory = is_victory(col, row)
     return victory, col, row
 
-def coinMessage(col, row):
+def coinMessage(col, row, total_coins):
+    prev_coin = total_coins
     if col == 1 and row == 2:
         answer = input(COINMESSAGE)
-        total = get_coin(answer, total)
+        total_coins = get_coin(answer, total_coins)
     elif col == 2 and row == 2:
         answer = input(COINMESSAGE)
-        total = get_coin(answer, total)
+        total_coins = get_coin(answer, total_coins)
     elif col == 2 and row == 3:
         answer = input(COINMESSAGE)
-        total = get_coin(answer, total)
+        total_coins = get_coin(answer, total_coins)
     elif col == 3 and row == 2:
         answer = input(COINMESSAGE)
-        total = get_coin(answer, total)
-
+        total_coins = get_coin(answer, total_coins)
+    if prev_coin != total_coins:
+        print("You received 1 coin, your total is now", str(total_coins) + ".")
+    return total_coins
 
 def get_coin(answer, total):
-    if answer.lower() == y:
+    if answer.lower() == "y":
         total += 1
         return total
     else:
@@ -98,6 +103,7 @@ def get_coin(answer, total):
 victory = False
 row = 1
 col = 1
+total_coins = 0
 
 valid_directions = NORTH
 print_directions(valid_directions)
@@ -105,8 +111,8 @@ print_directions(valid_directions)
 while not victory:
     victory, col, row = play_one_move(col, row, valid_directions)
     if victory:
-        print("Victory!")
+        print("Victory! Total coins", str(total_coins) + ".")
     else:
-        coinMessage(col, row)
+        total_coins = coinMessage(col, row, total_coins)
         valid_directions = find_directions(col, row)
         print_directions(valid_directions)
