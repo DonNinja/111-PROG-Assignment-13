@@ -74,8 +74,8 @@ def play_one_move(col, row, valid_directions):
 def coin_locations(col, row):
     locations = [[1,2],[2,2],[2,3],[3,2]]
     for i in range(1, 4):
-        if col == locations[i,col]:
-            
+        if col == locations[col,i]:
+            print("Pull a lever (y/n): ")
     
 # The main program starts here
 victory = False
