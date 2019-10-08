@@ -1,4 +1,5 @@
 # Gihub Repo: https://github.com/DonNinja/111-PROG-Assignment-13
+# Þeir sem unnu þetta saman voru: Yngvi Leó Þráinsson, Magnús Friðrik Helgason & Nökkvi Már Nökkvason
 
 # Constants
 NORTH = 'n'
