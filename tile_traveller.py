@@ -84,7 +84,7 @@ col = 1
 
 valid_directions = NORTH
 print_directions(valid_directions)
-
+# THIS IS A TEST
 while not victory:
     victory, col, row = play_one_move(col, row, valid_directions)
     if victory:
