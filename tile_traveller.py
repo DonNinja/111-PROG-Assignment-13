@@ -3,6 +3,7 @@ NORTH = 'n'
 EAST = 'e'
 SOUTH = 's'
 WEST = 'w'
+COINMESSAGE = "Pull a lever (y/n): "
 
 def move(direction, col, row):
     ''' Returns updated col, row given the direction '''
@@ -71,7 +72,15 @@ def play_one_move(col, row, valid_directions):
         victory = is_victory(col, row)
     return victory, col, row
 
-
+def coinMessage(col, row):
+    if col == 1 and row == 2:
+        print(COINMESSAGE)
+    elif col == 2 and row == 2:
+        print(COINMESSAGE)
+    elif col == 2 and row == 3:
+        print(COINMESSAGE)
+    elif col == 3 and row == 2:
+        print(COINMESSAGE)
     
 # The main program starts here
 victory = False
@@ -86,5 +95,6 @@ while not victory:
     if victory:
         print("Victory!")
     else:
+        coinMessage(col, row)
         valid_directions = find_directions(col, row)
         print_directions(valid_directions)
